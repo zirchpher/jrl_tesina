@@ -1,5 +1,5 @@
-import { Stack } from 'expo-router';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { Link, Stack } from 'expo-router';
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 
 export default function HomeLayout() {
   return (
@@ -17,10 +17,14 @@ export default function HomeLayout() {
             </View>
 
             <View style={styles.rightside}>
-              <Image
-                source={require('../assets/notification.png')}
-                style={styles.icon}
-              />
+              <Link href="/NotificationScreen" asChild>
+                <Pressable>
+                  <Image
+                    source={require('../assets/notification.png')}
+                    style={styles.icon}
+                  />
+                </Pressable>
+              </Link>
 
               <Image
                 source={require('../assets/search.png')}

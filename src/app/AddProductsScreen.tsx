@@ -3,13 +3,13 @@ import React from 'react';
 import { AddCardRow } from '@/components/AddCardRow';
 import { GoToIcon } from '@/components/GoToIcon';
 
-export default function ProductDetailsScreen() {
+export default function AddProductsScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <AddCardRow
           title="Nombre del Producto"
-          placeholder="Papas Lays Clásicas"
+          placeholder="Escribe el nombre del producto"
           imageSource={require('../assets/product.png')}
         />
 
@@ -21,25 +21,25 @@ export default function ProductDetailsScreen() {
 
         <AddCardRow
           title="Categoría"
-          placeholder="Papas"
+          placeholder="Escribe una categoría"
           imageSource={require('../assets/category.png')}
         />
 
         <AddCardRow
           title="Categoría"
-          placeholder="Papas"
+          placeholder="Escribe una categoría"
           imageSource={require('../assets/category.png')}
         />
 
         <AddCardRow
           title="Categoría"
-          placeholder="Papas"
+          placeholder="Escribe una categoría"
           imageSource={require('../assets/category.png')}
         />
 
         <AddCardRow
           title="Categoría"
-          placeholder="Papas"
+          placeholder="Escribe una categoría"
           imageSource={require('../assets/category.png')}
         />
       </ScrollView>

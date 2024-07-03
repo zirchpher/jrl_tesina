@@ -3,19 +3,31 @@ import React from 'react';
 import { AddCardRow } from '@/components/AddCardRow';
 import { GoToIcon } from '@/components/GoToIcon';
 
-export default function CategoryDetailsScreen() {
+export default function UserDatailScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <AddCardRow
-          title="Categoría"
-          placeholder="Normal"
-          imageSource={require('../assets/category.png')}
+          title="Usuario"
+          placeholder="Juan Perez"
+          imageSource={require('../assets/person.png')}
+        />
+
+        <AddCardRow
+          title="Contraseña"
+          placeholder="********"
+          imageSource={require('../assets/pass.png')}
+        />
+
+        <AddCardRow
+          title="Rol"
+          placeholder="Administrador"
+          imageSource={require('../assets/person.png')}
         />
       </ScrollView>
 
       <GoToIcon
-        goToScreen="/CategoriesScreen"
+        goToScreen="/UsersScreen"
         imageSource={require('../assets/confirm_icon.png')}
       />
     </View>

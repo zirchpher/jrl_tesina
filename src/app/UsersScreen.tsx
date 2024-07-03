@@ -1,37 +1,36 @@
-import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { SearchInput } from '@/components/SearchInput';
 import { CardInfo } from '@/components/CardInfo';
 import { GoToIcon } from '@/components/GoToIcon';
+import { SearchInput } from '@/components/SearchInput';
 
 const data = [
   {
-    key: 'Proovedor',
-    value: 'Juan Miguel Suarez Mendoza',
+    key: 'Usuario',
+    value: 'Juan Perez',
   },
   {
-    key: 'Dirección',
-    value: 'Av. 28 de Julio SENATI',
+    key: 'contraseña',
+    value: '********',
   },
   {
-    key: 'Teléfono',
-    value: '123-456-789',
+    key: 'Rol',
+    value: 'Administrador',
   },
 ];
 
-export default function SuppliersScreen() {
+export default function UsersScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <SearchInput />
 
-        <CardInfo data={data} ctaSecondaryButton="/SupplierDetailsScreen" />
+        <CardInfo data={data} ctaSecondaryButton="/UserDatailScreen" />
 
-        <CardInfo data={data} ctaSecondaryButton="/SupplierDetailsScreen" />
+        <CardInfo data={data} ctaSecondaryButton="/UserDatailScreen" />
       </ScrollView>
 
       <GoToIcon
-        goToScreen="/AddSuppliersScreen"
+        goToScreen="/AddUserScreen"
         imageSource={require('../assets/add.png')}
       />
     </View>

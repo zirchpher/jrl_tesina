@@ -1,25 +1,32 @@
-import { View, StyleSheet, ScrollView, Image } from 'react-native';
 import { AddCardRow } from '@/components/AddCardRow';
 import { GoToIcon } from '@/components/GoToIcon';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
-export default function SupplierDetailsScreen() {
+export default function AddUserScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
         <AddCardRow
-          title="Proveedor"
-          placeholder="Rosa Fiorella Catilla Nuñez"
+          title="Usuario"
+          placeholder="Agregar usuario"
           imageSource={require('../assets/person.png')}
         />
+
         <AddCardRow
-          title="Dirección"
-          placeholder="Av. 28 de Julio"
-          imageSource={require('../assets/location.png')}
+          title="Contraseña"
+          placeholder="********"
+          imageSource={require('../assets/pass.png')}
+        />
+
+        <AddCardRow
+          title="Rol"
+          placeholder="Administrador"
+          imageSource={require('../assets/person.png')}
         />
       </ScrollView>
 
       <GoToIcon
-        goToScreen="/SuppliersScreen"
+        goToScreen="/UsersScreen"
         imageSource={require('../assets/confirm_icon.png')}
       />
     </View>

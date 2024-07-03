@@ -1,36 +1,69 @@
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable, Image, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 
 export default function Page() {
   return (
-    <View>
-      <Text>Home</Text>
-
-      <Image source={require('../assets/logo_header.png')} />
-
-      <Link href="/LoginScreen" asChild>
+    <View style={styles.container}>
+      <Link style={styles.link} href="/LoginScreen" asChild>
         <Pressable>
-          <Text>Go to Login</Text>
+          <Text style={styles.link__text}>IR A LA PANTALLA INICIAR SESIÓN</Text>
         </Pressable>
       </Link>
 
-      <Link href="/HomeScreen" asChild>
+      <Link style={styles.link} href="/HomeScreen" asChild>
         <Pressable>
-          <Text>Go to Home</Text>
+          <Text style={styles.link__text}>IR A LA PANTALLA HOME</Text>
         </Pressable>
       </Link>
 
-      <Link href="/NotificationScreen" asChild>
+      <Link style={styles.link} href="/NotificationScreen" asChild>
         <Pressable>
-          <Text>IR A LA PANTALLA NOTIFICACIONES</Text>
+          <Text style={styles.link__text}>IR A LA PANTALLA NOTIFICACIONES</Text>
         </Pressable>
       </Link>
 
-      <Link href="/SuppliersScreen" asChild>
+      <Link style={styles.link} href="/SuppliersScreen" asChild>
         <Pressable>
-          <Text>IR A LA PANTALLA PROVEEDORES</Text>
+          <Text style={styles.link__text}>IR A LA PANTALLA PROVEEDORES</Text>
+        </Pressable>
+      </Link>
+
+      <Link style={styles.link} href="/CategoriesScreen" asChild>
+        <Pressable>
+          <Text style={styles.link__text}>IR A LA PANTALLA CATEGORÍAS</Text>
+        </Pressable>
+      </Link>
+
+      <Link style={styles.link} href="/ProductsScreen" asChild>
+        <Pressable>
+          <Text style={styles.link__text}>IR A LA PANTALLA PRODUCTOS</Text>
+        </Pressable>
+      </Link>
+
+      <Link style={styles.link} href="/UsersScreen" asChild>
+        <Pressable>
+          <Text style={styles.link__text}>IR A LA PANTALLA USUARIOS</Text>
         </Pressable>
       </Link>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  link: {
+    marginTop: 10,
+    backgroundColor: '#0D4B80',
+    padding: 10,
+    borderRadius: 5,
+  },
+
+  link__text: {
+    color: '#fff',
+  },
+});

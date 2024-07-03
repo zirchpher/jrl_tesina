@@ -11,12 +11,17 @@ interface DataItem {
 
 interface CardInfoProps {
   data: DataItem[];
-  ctaSecondaryButton?: string;
+  ctaSecondaryButton: string;
+  borderWidth?: number;
 }
 
-export function CardInfo({ data, ctaSecondaryButton }: CardInfoProps) {
+export function CardInfo({
+  data,
+  ctaSecondaryButton,
+  borderWidth = 1,
+}: CardInfoProps) {
   return (
-    <View style={styles.cardInfoContainer}>
+    <View style={{ ...styles.cardInfoContainer, borderWidth: borderWidth }}>
       <View style={styles.cardInfo}>
         {data.map((item, index) => (
           <View style={styles.card} key={index}>
@@ -49,7 +54,6 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     paddingHorizontal: 16,
     borderRadius: 16,
-    borderWidth: 1,
     borderColor: '#333333',
     marginTop: 24,
   },
