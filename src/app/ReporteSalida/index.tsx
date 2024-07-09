@@ -1,28 +1,26 @@
-import { View, StyleSheet, ScrollView, Image, Pressable } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
+import React from 'react';
+import { Link } from 'expo-router';
+import { ModalInfo } from '@/types/Modal';
 import { SearchInput } from '@/components/SearchInput';
 import { CardInfo } from '@/components/CardInfo';
-import { ModalInfo } from '@/types/Modal';
-import { Link } from 'expo-router';
 
 const modalInfo: ModalInfo[] = [
   {
-    title: 'Ver producto',
-    image: require('../assets/eye_icon.png'),
-    goToPage: '/ViewProductScreen',
-  },
-  {
-    title: 'Editar',
-    image: require('../assets/edit_icon.png'),
-    goToPage: '/EditProductScreen',
-  },
-  {
-    title: 'Agregar Producto',
-    image: require('../assets/add.png'),
-    goToPage: '/AddProductScreen',
+    title: 'Ver Productos de Salida',
+    image: require('../../assets/eye_icon.png'),
+    goToPage: '/ReporteSalida/ProductosReporteSalida',
   },
 ];
 
-export default function ProductsScreen() {
+export default function index() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -31,25 +29,23 @@ export default function ProductsScreen() {
             <SearchInput />
           </View>
 
-          <Link key="1" href="/AddProductScreen" asChild>
+          <Link key="1" href="/ReporteSalida/AgregarProductoSalida" asChild>
             <Pressable>
-              <Image source={require('../assets/add_button.png')} />
+              <Image source={require('../../assets/add_button.png')} />
             </Pressable>
           </Link>
         </View>
 
         <CardInfo
-          title="Papas Lays Clásicas"
-          subtitle="Papas"
+          title="Reporte Salida 01"
+          subtitle="Enviado"
           modalInfo={modalInfo}
-          imageSource={require('../assets/papaslays.png')}
         />
 
         <CardInfo
-          title="Papas Lays Clásicas"
-          subtitle="Papas"
+          title="Reporte Salida 02"
+          subtitle="Enviado"
           modalInfo={modalInfo}
-          imageSource={require('../assets/papaslays.png')}
         />
       </ScrollView>
     </View>

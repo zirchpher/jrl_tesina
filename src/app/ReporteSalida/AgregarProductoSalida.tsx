@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export default function AddUserScreen() {
+export default function AgregarProductoSalida() {
   return (
     <View>
-      <Text>AddUserScreen</Text>
+      <Text>AgregarProductoSalida</Text>
     </View>
   );
 }

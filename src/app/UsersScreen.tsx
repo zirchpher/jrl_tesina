@@ -1,20 +1,27 @@
-import { View, StyleSheet, ScrollView } from 'react-native';
-import { CardInfo } from '@/components/CardInfo';
-import { GoToIcon } from '@/components/GoToIcon';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Pressable,
+} from 'react-native';
+import React from 'react';
+import { ModalInfo } from '@/types/Modal';
+import { Link } from 'expo-router';
 import { SearchInput } from '@/components/SearchInput';
+import { CardInfo } from '@/components/CardInfo';
 
-const data = [
+const modalInfo: ModalInfo[] = [
   {
-    key: 'Usuario',
-    value: 'Juan Perez',
+    title: 'Ver Usuario',
+    image: require('../assets/eye_icon.png'),
+    goToPage: '/ViewUserScreen',
   },
   {
-    key: 'contraseña',
-    value: '********',
-  },
-  {
-    key: 'Rol',
-    value: 'Administrador',
+    title: 'Editar Usuario',
+    image: require('../assets/edit_icon.png'),
+    goToPage: '/EditUserScreen',
   },
 ];
 
@@ -22,17 +29,30 @@ export default function UsersScreen() {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <SearchInput />
+        <View style={styles.hero}>
+          <View style={styles.searchInputContainer}>
+            <SearchInput />
+          </View>
 
-        <CardInfo data={data} ctaSecondaryButton="/UserDatailScreen" />
+          <Link key="1" href="/AddUserScreen" asChild>
+            <Pressable>
+              <Image source={require('../assets/add_button.png')} />
+            </Pressable>
+          </Link>
+        </View>
 
-        <CardInfo data={data} ctaSecondaryButton="/UserDatailScreen" />
+        <CardInfo
+          title="Remmian"
+          subtitle="Administrador"
+          modalInfo={modalInfo}
+        />
+
+        <CardInfo
+          title="Jorge Romero"
+          subtitle="Jefe de almacén"
+          modalInfo={modalInfo}
+        />
       </ScrollView>
-
-      <GoToIcon
-        goToScreen="/AddUserScreen"
-        imageSource={require('../assets/add.png')}
-      />
     </View>
   );
 }
@@ -43,7 +63,17 @@ const styles = StyleSheet.create({
   },
 
   scrollViewContent: {
-    paddingVertical: 24,
     paddingHorizontal: 16,
+    paddingVertical: 24,
+  },
+
+  hero: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  searchInputContainer: {
+    width: '80%',
   },
 });

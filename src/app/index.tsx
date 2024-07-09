@@ -28,12 +28,6 @@ export default function Page() {
         </Pressable>
       </Link>
 
-      <Link style={styles.link} href="/CategoriesScreen" asChild>
-        <Pressable>
-          <Text style={styles.link__text}>IR A LA PANTALLA CATEGORÍAS</Text>
-        </Pressable>
-      </Link>
-
       <Link style={styles.link} href="/ProductsScreen" asChild>
         <Pressable>
           <Text style={styles.link__text}>IR A LA PANTALLA PRODUCTOS</Text>
@@ -43,6 +37,22 @@ export default function Page() {
       <Link style={styles.link} href="/UsersScreen" asChild>
         <Pressable>
           <Text style={styles.link__text}>IR A LA PANTALLA USUARIOS</Text>
+        </Pressable>
+      </Link>
+
+      <Link style={styles.link} href="/ProductosProveedor" asChild>
+        <Pressable>
+          <Text style={styles.link__text}>
+            IR A LA PANTALLA PRODUCTOS-PROVEEDOR
+          </Text>
+        </Pressable>
+      </Link>
+
+      <Link style={styles.link} href="/ReporteSalida" asChild>
+        <Pressable>
+          <Text style={styles.link__text}>
+            IR A LA PANTALLA REPORTE SALIDA PRODUCTOS
+          </Text>
         </Pressable>
       </Link>
     </View>

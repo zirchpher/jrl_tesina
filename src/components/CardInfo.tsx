@@ -1,85 +1,108 @@
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { SecondaryButton } from './SecondaryButton';
-import { PrimaryButton } from './PrimaryButton';
-import { Link } from 'expo-router';
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageSourcePropType,
+  TouchableOpacity,
+} from 'react-native';
+import { ModalInfo } from '@/types/Modal';
 
-interface DataItem {
-  key: string;
-  value: string;
-}
+import BottomSheet from './BottomSheet';
 
 interface CardInfoProps {
-  data: DataItem[];
-  ctaSecondaryButton: string;
-  borderWidth?: number;
+  title: string;
+  subtitle: string;
+  imageSource?: ImageSourcePropType;
+  modalInfo: ModalInfo[];
 }
 
 export function CardInfo({
-  data,
-  ctaSecondaryButton,
-  borderWidth = 1,
+  title,
+  subtitle,
+  imageSource,
+  modalInfo,
 }: CardInfoProps) {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   return (
-    <View style={{ ...styles.cardInfoContainer, borderWidth: borderWidth }}>
-      <View style={styles.cardInfo}>
-        {data.map((item, index) => (
-          <View style={styles.card} key={index}>
-            <Text style={styles.cardKey}>{item.key}</Text>
-            <Text style={styles.cardValue}>{item.value}</Text>
+    <View>
+      <View style={styles.cardsContainer}>
+        {imageSource && (
+          <View style={styles.icon}>
+            <Image source={imageSource} />
           </View>
-        ))}
-      </View>
+        )}
 
-      <View style={styles.cardButtonContainer}>
-        <View style={{ width: 140 }}>
-          <Link href={ctaSecondaryButton} asChild>
-            <Pressable>
-              <SecondaryButton title="Editar" height={38} />
-            </Pressable>
-          </Link>
+        <View style={styles.text}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
 
-        <View style={{ width: 140 }}>
-          <PrimaryButton title="Eliminar" height={38} backgroundColor="red" />
-        </View>
+        <TouchableOpacity style={styles.button} onPress={toggleModal}>
+          <Image
+            source={require('../assets/options_icon.png')}
+            style={{ width: 32, height: 32 }}
+          />
+        </TouchableOpacity>
       </View>
+
+      <BottomSheet
+        isVisible={isModalVisible}
+        onClose={toggleModal}
+        modalInfo={modalInfo}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  cardInfoContainer: {
+  cardsContainer: {
     width: '100%',
-    paddingVertical: 24,
-    paddingHorizontal: 16,
-    borderRadius: 16,
-    borderColor: '#333333',
+    flexDirection: 'row',
     marginTop: 24,
+    height: 72,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,
   },
 
-  cardInfo: {
-    marginBottom: 16,
+  icon: {
+    width: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 16,
   },
 
-  card: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 12,
+  text: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingLeft: 16,
   },
 
-  cardKey: {
-    fontWeight: 'bold',
+  title: {
     fontSize: 16,
+    fontWeight: 'bold',
   },
 
-  cardValue: {
+  subtitle: {
     fontSize: 14,
-    color: '#333333',
+    fontWeight: '300',
   },
 
-  cardButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  button: {
+    width: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
