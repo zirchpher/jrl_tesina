@@ -16,6 +16,7 @@ interface CardInfoProps {
   subtitle: string;
   imageSource?: ImageSourcePropType;
   modalInfo: ModalInfo[];
+  supplierId: Number;
 }
 
 export function CardInfo({
@@ -23,6 +24,7 @@ export function CardInfo({
   subtitle,
   imageSource,
   modalInfo,
+  supplierId,
 }: CardInfoProps) {
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -56,6 +58,7 @@ export function CardInfo({
         isVisible={isModalVisible}
         onClose={toggleModal}
         modalInfo={modalInfo}
+        supplierId={supplierId?.toString()}
       />
     </View>
   );

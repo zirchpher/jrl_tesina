@@ -6,26 +6,51 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'expo-router';
 import { ModalInfo } from '@/types/Modal';
 import { SearchInput } from '@/components/SearchInput';
 import { CardInfo } from '@/components/CardInfo';
+import { ReporteSalida } from '@/types/ReporteSalida';
 
 const modalInfo: ModalInfo[] = [
   {
-    title: 'Ver Producto Proveedor',
+    title: 'Ver Empleado',
     image: require('../../assets/eye_icon.png'),
-    goToPage: '/ProductosProveedor/ViewProductProveedor',
+    goToPage: (id: string) => `/Empleados/VerEmpleado/${id}`,
   },
   {
-    title: 'Editar Producto Proveedor',
+    title: 'Editar Empleado',
     image: require('../../assets/edit_icon.png'),
-    goToPage: '/ProductosProveedor/EditProductProveedor',
+    goToPage: (id: string) => `/Empleados/EditEmpleado/${id}`,
   },
 ];
 
 export default function index() {
+  const [reporteSalida, setReporteSalida] = useState<ReporteSalida[]>([]);
+
+  useEffect(() => {
+    const fetchReporteSalida = async () => {
+      try {
+        const response = await fetch(
+          'http://192.168.8.100:3000/api/salidaProducto'
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setReporteSalida(data);
+        } else {
+          console.error('Error al obtener proveedores:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
+      }
+    };
+
+    fetchReporteSalida();
+  }, []);
+
+  console.log(reporteSalida);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -41,19 +66,15 @@ export default function index() {
           </Link>
         </View>
 
-        <CardInfo
-          title="Papas Lays Clásicas"
-          subtitle="Papas"
-          modalInfo={modalInfo}
-          imageSource={require('../../assets/papaslays.png')}
-        />
-
-        <CardInfo
-          title="Papas Lays Clásicas"
-          subtitle="Papas"
-          modalInfo={modalInfo}
-          imageSource={require('../../assets/papaslays.png')}
-        />
+        {/* {reporteSalida.map((reporte, index) => (
+          <CardInfo
+            key={index}
+            title={reporte.nombre_salida}
+            subtitle={`${reporte.estado_salida}`}
+            modalInfo={modalInfo}
+            supplierId={index}
+          />
+        ))} */}
       </ScrollView>
     </View>
   );

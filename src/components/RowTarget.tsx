@@ -1,36 +1,54 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
 import React from 'react';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-export function RowTarget() {
+interface RowTargetProps {
+  label: string;
+  onChangeText?: (text: string) => void;
+  text?: string;
+  value?: string;
+}
+
+export function RowTarget({
+  label,
+  onChangeText,
+  text,
+  value,
+}: RowTargetProps) {
   return (
-    <View>
-      <View style={styles.body__row}>
-        <Text style={styles.body__title}>Proveedor</Text>
-        <TextInput style={styles.body__subtitle}>Texto Demo</TextInput>
-      </View>
+    <View style={styles.rowContainer}>
+      <Text style={styles.label}>{label}</Text>
+      {onChangeText ? (
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={value}
+        />
+      ) : (
+        <Text style={styles.text}>{text}</Text>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  body__row: {
-    flexDirection: 'row',
-    height: 24,
-    borderBottomWidth: 1,
-    borderColor: '#CFCECE',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
+  rowContainer: {
+    marginBottom: 16,
   },
-
-  body__title: {
+  label: {
     fontWeight: 'bold',
-    fontSize: 16,
+    marginBottom: 8,
   },
-
-  body__subtitle: {
-    fontSize: 14,
-    fontWeight: 'light',
-    color: '#ADADAD',
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 8,
+    borderRadius: 4,
+  },
+  text: {
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 8,
+    borderRadius: 4,
   },
 });

@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 interface DropDownProps {
   label: string;
-  items: { label: string; value: string }[];
+  items: { label: string; value: number | string }[];
+  selectedValue: string | number;
+  onValueChange: (itemValue: string | number) => void;
 }
 
-export function DropDown({ label, items }: DropDownProps) {
-  const [selectedValue, setSelectedValue] = useState<string>(
-    items[0]?.value || ''
-  );
-
+export function DropDown({
+  label,
+  items,
+  selectedValue,
+  onValueChange,
+}: DropDownProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={selectedValue}
-          onValueChange={(itemValue) => setSelectedValue(itemValue)}
+          onValueChange={onValueChange}
           style={styles.picker}
         >
           {items.map((item) => (
@@ -53,3 +56,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export default DropDown;

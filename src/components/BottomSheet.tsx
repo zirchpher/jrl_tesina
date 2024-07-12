@@ -8,9 +8,15 @@ interface BottomSheetProps {
   isVisible: boolean;
   onClose: () => void;
   modalInfo: ModalInfo[];
+  supplierId: string;
 }
 
-const BottomSheet = ({ isVisible, onClose, modalInfo }: BottomSheetProps) => {
+const BottomSheet = ({
+  isVisible,
+  onClose,
+  modalInfo,
+  supplierId,
+}: BottomSheetProps) => {
   return (
     <Modal
       isVisible={isVisible}
@@ -19,7 +25,7 @@ const BottomSheet = ({ isVisible, onClose, modalInfo }: BottomSheetProps) => {
     >
       <View style={styles.modalContent}>
         {modalInfo.map((item, index) => (
-          <Link key={index} href={item.goToPage} asChild>
+          <Link key={index} href={item.goToPage(supplierId)} asChild>
             <Pressable onPress={onClose}>
               <View style={styles.modalRow}>
                 <Image source={item.image} />

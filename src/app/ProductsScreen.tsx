@@ -3,26 +3,43 @@ import { SearchInput } from '@/components/SearchInput';
 import { CardInfo } from '@/components/CardInfo';
 import { ModalInfo } from '@/types/Modal';
 import { Link } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { Producto } from '@/types/Product';
 
 const modalInfo: ModalInfo[] = [
   {
-    title: 'Ver producto',
+    title: 'Ver Producto',
     image: require('../assets/eye_icon.png'),
-    goToPage: '/ViewProductScreen',
+    goToPage: (id: string) => `/Productos/VerProducto/${id}`,
   },
   {
-    title: 'Editar',
+    title: 'Editar Producto',
     image: require('../assets/edit_icon.png'),
-    goToPage: '/EditProductScreen',
-  },
-  {
-    title: 'Agregar Producto',
-    image: require('../assets/add.png'),
-    goToPage: '/AddProductScreen',
+    goToPage: (id: string) => `/Productos/EditProducto/${id}`,
   },
 ];
 
 export default function ProductsScreen() {
+  const [productos, setProductos] = useState<Producto[]>([]);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch('http://192.168.8.100:3000/api/productos');
+        if (response.ok) {
+          const data = await response.json();
+          setProductos(data);
+        } else {
+          console.error('Error al obtener proveedores:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error en la solicitud:', error);
+      }
+    };
+
+    fetchProductos();
+  }, []);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -38,19 +55,16 @@ export default function ProductsScreen() {
           </Link>
         </View>
 
-        <CardInfo
-          title="Papas Lays Clásicas"
-          subtitle="Papas"
-          modalInfo={modalInfo}
-          imageSource={require('../assets/papaslays.png')}
-        />
-
-        <CardInfo
-          title="Papas Lays Clásicas"
-          subtitle="Papas"
-          modalInfo={modalInfo}
-          imageSource={require('../assets/papaslays.png')}
-        />
+        {productos.map((producto) => (
+          <CardInfo
+            key={producto.id}
+            title={producto.nombre_producto}
+            subtitle={`${producto.stock} en stock`}
+            supplierId={producto.id}
+            modalInfo={modalInfo}
+            imageSource={require('../assets/papaslays.png')}
+          />
+        ))}
       </ScrollView>
     </View>
   );
